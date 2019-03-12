@@ -3,7 +3,7 @@
 
 namespace gloop {
 	
-	void	GLoop::run(ecm::Register &reg) {
+	void	GLoop::run(GEcm::Register &reg) {
 		auto ret = run_hooks(_stageM.get_stage(gloop::StageType::INIT), reg);
 		if (ret != gloop::HookStatus::OK)
 			return;
@@ -13,24 +13,19 @@ namespace gloop {
 		run_hooks(_stageM.get_stage(gloop::StageType::FINAL), reg);
 	}
 
-	gloop::HookStatus		GLoop::run_hooks(gloop::Stage &stage, ecm::Register &reg) {
-		std::cout << "0" << std::endl;
+	gloop::HookStatus		GLoop::run_hooks(gloop::Stage &stage, GEcm::Register &reg) {
 		auto ret = run_one_hook(stage.get_hookMap(gloop::HookType::EARLY), reg);
-		std::cout << "1" << std::endl;
 		if (ret != gloop::HookStatus::OK)
 			return ret;
-		std::cout << "2" << std::endl;
 		ret = run_one_hook(stage.get_hookMap(gloop::HookType::MIDDLE), reg);
 		if (ret != gloop::HookStatus::OK)
 			return ret;
-		std::cout << "3" << std::endl;
 		return run_one_hook(stage.get_hookMap(gloop::HookType::LAST), reg);
 	}
 	
-	gloop::HookStatus		GLoop::run_one_hook(gloop::Stage::hookMap &hook, ecm::Register &reg) {
+	gloop::HookStatus		GLoop::run_one_hook(gloop::Stage::hookMap &hook, GEcm::Register &reg) {
 		
 		for (auto &&elem : hook) {
-			std::cout << "in hook" << std::endl;
 			auto ret = gloop::HookStatus::OK;
 			// if (elem.second.hook.threadable == true) {
 			// } else
@@ -42,7 +37,7 @@ namespace gloop {
 		return gloop::HookStatus::OK;
 	}
 
-	gloop::HookStatus		GLoop::run_loop_hooks(gloop::Stage &stage, ecm::Register &reg) {
+	gloop::HookStatus		GLoop::run_loop_hooks(gloop::Stage &stage, GEcm::Register &reg) {
 		auto ret = run_one_loop_hook(stage.get_hookMap(gloop::HookType::EARLY), reg);
 		if (ret != gloop::HookStatus::OK)
 			return ret;
@@ -52,7 +47,7 @@ namespace gloop {
 		return run_one_loop_hook(stage.get_hookMap(gloop::HookType::LAST), reg);
 	}
 
-	gloop::HookStatus		GLoop::run_one_loop_hook(gloop::Stage::hookMap &hook, ecm::Register &reg) {
+	gloop::HookStatus		GLoop::run_one_loop_hook(gloop::Stage::hookMap &hook, GEcm::Register &reg) {
 		for (auto &&elem : hook) {
 			gtimer	now = std::chrono::system_clock::now();
 			long		elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - elem.second.last_call).count();
