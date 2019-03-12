@@ -9,17 +9,24 @@ set(CXX_STANDARD 17)
 
 project(Bomber VERSION 1.0)
 
-#add_subdirectory(src)
+set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/CMakeFiles)
+include("checkBuildType")
+include("getIrrlicht")
+include("getIrrKlang")
 
-# target_link_libraries(${PROJECT_NAME}
-# 	libSrcs
-# 	${CMAKE_DL_LIBS}
+add_subdirectory(src)
+add_subdirectory(GLoop)
+
+
+target_link_libraries(${PROJECT_NAME}
+	libGLoop
+ 	${CMAKE_DL_LIBS}
 # 	sfml-graphics
 # 	sfml-window
 # 	sfml-system
 # 	sfml-network
 # 	sfml-audio
-# )
+)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY})
