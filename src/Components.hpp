@@ -3,6 +3,12 @@
 #include <vector>
 #include "Register.hpp"
 
+struct vec3df {
+	double	x;
+	double	y;
+	double	z;
+};
+
 namespace Bomber {
 
 	template<typename T>
@@ -47,6 +53,7 @@ namespace Bomber {
 	struct Graphics {
 		bool		isVisible;
 		std::string	texture;
+		vec3df pos;
 	};
 	
 
