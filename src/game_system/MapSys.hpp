@@ -13,7 +13,7 @@ namespace Bomber {
 		private:
 			void	map_generator(GEcm::Register &);
 
-			void	generate_map_without_boxes(GEcm::Register &);
+			void	generate_wall_ground(GEcm::Register &);
 			/* Data */
 
 	}; // MapSys

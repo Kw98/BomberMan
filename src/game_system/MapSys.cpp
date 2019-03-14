@@ -15,21 +15,22 @@ namespace Bomber {
 	}
 
 	void	MapSys::map_generator(GEcm::Register &reg) {
-		generate_map_without_boxes(reg);
+		generate_wall_ground(reg);
 	}
 
-	void	MapSys::generate_map_without_boxes(GEcm::Register &reg) {
-		for (int y = 0; y < 19; y++) {
-			for (int x = 0; x < 17; x++) {
-				entity = reg.create();
-				reg.construct<Pos>(entity, x, y);
+	void	MapSys::generate_wall_ground(GEcm::Register &reg) {
+		for (int y = 0; y < Bomber::MAX_Y; y++) {
+			for (int x = 0; x < Bomber::MAX_X; x++) {
 				if (x % 2 == 0 && y % 2 == 0) {
-					reg.construct<Case>(entity, Bomber::Bomber_types::WALL);
-					reg.construct<Graphic>(entity, "texture");
-				} else {
-					reg.construct<Case>(entity, Bomber::Bomber_types::NOTHING);
-					reg.construct<Graphic>(entity, "texture");
+					auto entity = reg.create();
+					reg.construct<Bomber::Bomber_types>(entity, Bomber::Bomber_types::WALL);
+					reg.construct<Bomber::Collision>(entity, Bomber::Collision::BLOCK_ALL);
+					reg.construct<Bomber::Graphics>(entity, true, Bomber::WALL_T);
+					reg.construct<Bomber::Pos>(entity, x, y, 0);
 				}
+				auto ground = reg.create();
+				reg.construct<Bomber::Graphics>(ground, true, Bomber::GROUND_T);
+				reg.construct<Bomber::Pos>(ground, x, y, -1);
 			}
 		}
 	}
