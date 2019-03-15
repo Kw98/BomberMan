@@ -18,15 +18,18 @@ add_subdirectory(src)
 add_subdirectory(GLoop)
 
 
+message("IRRLICHT_INCLUDE_DIR => ${IRRLICHT_INCLUDE_DIR}")
+message("IRRLICHT_LIBRARY_DIR => ${IRRLICHT_LIBRARY_DIR}")
+message("IRRKLANG_INCLUDE_DIR => ${IRRKLANG_INCLUDE_DIR}")
+
+
 target_link_libraries(${PROJECT_NAME}
 	libGLoop
  	${CMAKE_DL_LIBS}
-# 	sfml-graphics
-# 	sfml-window
-# 	sfml-system
-# 	sfml-network
-# 	sfml-audio
+ 	${IRRLICHT_LIBRARY_DIR}
+	${IRRKLANG_LIBRARY_DIR}
 )
+
 
 set_target_properties(${PROJECT_NAME} PROPERTIES
 	RUNTIME_OUTPUT_DIRECTORY ${CMAKE_HOME_DIRECTORY})

@@ -3,6 +3,12 @@
 #include <vector>
 #include "Register.hpp"
 
+struct vec3df {
+	double	x;
+	double	y;
+	double	z;
+};
+
 namespace Bomber {
 
 	constexpr char	GROUND_T[] = "./sprites/BrickGround.jpg";
@@ -62,6 +68,7 @@ namespace Bomber {
 	struct Graphics {
 		bool		isVisible;
 		std::string	texture;
+		vec3df pos;
 	};
 
 	struct Input {
