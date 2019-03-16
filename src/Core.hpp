@@ -1,6 +1,7 @@
 #pragma once
 
 #include "MapSys.hpp"
+#include "PlayerSys.hpp"
 #include "GLoop.hpp"
 #include "Register.hpp"
 #include "IrrlichtSystem.hpp"
@@ -16,6 +17,7 @@ namespace Bomber {
 
 			void	run() {
 				Bomber::MapSys	map(_gloop);
+				Bomber::PlayerSys	players(_gloop);
 
 				_gloop.run(_reg);
 			}

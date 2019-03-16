@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <queue>
 #include "Register.hpp"
 
 struct vec3df {
@@ -14,6 +15,8 @@ namespace Bomber {
 	constexpr char	GROUND_T[] = "./sprites/BrickGround.jpg";
 	constexpr char	WALL_T[] = "./sprites/BrickWall.jpg";
 	constexpr char	BOX_T[] = "./sprites/wood_box.png";
+	constexpr char	PLAYER_ONE_T[] = "./sprites/p1.jpg";
+	constexpr char	PLAYER_TWO_T[] = "./sprites/p2.jpg";
 
 	constexpr int	MAX_X = 17;
 	constexpr int	MAX_Y = 19;
@@ -39,7 +42,6 @@ namespace Bomber {
 	};
 
 	enum Bomber_bonus {
-		NOTHING,
 		BIG_EXPLOSION,
 		LIFE,
 		MORE_BOMB,
@@ -57,6 +59,8 @@ namespace Bomber {
 		CUBE,
 		SPHERE,
 		MESH,
+		TEXT,
+		BUTTON,
 	};
 
 	enum State {
@@ -64,6 +68,20 @@ namespace Bomber {
 		NEW,
 		UPDATE,
 		DELETE,
+	};
+
+	enum Keys {
+		K_Z,
+		K_S,
+		K_Q,
+		K_D,
+		ARROW_U,
+		ARROW_D,
+		ARROW_L,
+		ARROW_R,
+		K_SPACE,
+		K_ENTER,
+		ESCAPE,
 	};
 
 	struct Pos : public Vec3<int> {};
@@ -84,9 +102,11 @@ namespace Bomber {
 		std::string		texture;
 		Bomber::ItemType	type;
 		Bomber::State	state;
+		double		size;
 	};
 
-	struct Input {
-		
+	struct Inputs {
+		std::queue<Bomber::Keys>	keys;
 	};
+
 } // Bomber

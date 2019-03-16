@@ -28,11 +28,11 @@ namespace Bomber {
 					auto entity = reg.create();
 					reg.construct<Bomber::Bomber_types>(entity, Bomber::Bomber_types::WALL);
 					reg.construct<Bomber::Collision>(entity, Bomber::Collision::BLOCK_ALL);
-					reg.construct<Bomber::Graphics>(entity, true, Bomber::WALL_T, Bomber::ItemType::CUBE, Bomber::State::NEW);
+					reg.construct<Bomber::Graphics>(entity, true, Bomber::WALL_T, Bomber::ItemType::CUBE, Bomber::State::NEW, 1.0);
 					reg.construct<Bomber::Pos>(entity, x, y, 0);
 				}
 				auto ground = reg.create();
-				reg.construct<Bomber::Graphics>(ground, true, Bomber::GROUND_T, Bomber::ItemType::CUBE, Bomber::State::NEW);
+				reg.construct<Bomber::Graphics>(ground, true, Bomber::GROUND_T, Bomber::ItemType::CUBE, Bomber::State::NEW, 1.0);
 				reg.construct<Bomber::Pos>(ground, x, y, -1);
 			}
 		}
@@ -49,7 +49,7 @@ namespace Bomber {
 						auto entity = reg.create();
 						reg.construct<Bomber::Bomber_types>(entity, Bomber::Bomber_types::BOX);
 						reg.construct<Bomber::Collision>(entity, Bomber::Collision::BLOCK_PLAYER);
-						reg.construct<Bomber::Graphics>(entity, true, Bomber::BOX_T, Bomber::ItemType::CUBE, Bomber::State::NEW);
+						reg.construct<Bomber::Graphics>(entity, true, Bomber::BOX_T, Bomber::ItemType::CUBE, Bomber::State::NEW, 1.0);
 						reg.construct<Bomber::Pos>(entity, x, y, 0);
 					}
 				}
