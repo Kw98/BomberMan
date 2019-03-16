@@ -80,10 +80,10 @@ namespace Bomber {
 	};
 
 	struct Graphics {
-		bool		isVisible;
-		std::string	texture;
-		ItemType	type;
-		State		state;
+		bool			isVisible;
+		std::string		texture;
+		Bomber::ItemType	type;
+		Bomber::State	state;
 	};
 
 	struct Input {
