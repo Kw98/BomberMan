@@ -17,6 +17,7 @@ namespace Bomber {
 
 	constexpr int	MAX_X = 17;
 	constexpr int	MAX_Y = 19;
+	constexpr int	POURCENT_MAP_REMPL = 10;
 
 	template<typename T>
 	struct Vec3 {
@@ -52,6 +53,19 @@ namespace Bomber {
 		GET,
 	};
 
+	enum ItemType {
+		CUBE,
+		SPHERE,
+		MESH,
+	};
+
+	enum State {
+		NOTHING,
+		NEW,
+		UPDATE,
+		DELETE,
+	};
+
 	struct Pos : public Vec3<int> {};
 
 	struct Stat {
@@ -68,7 +82,8 @@ namespace Bomber {
 	struct Graphics {
 		bool		isVisible;
 		std::string	texture;
-		vec3df pos;
+		ItemType	type;
+		State		state;
 	};
 
 	struct Input {

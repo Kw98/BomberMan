@@ -1,6 +1,7 @@
 
 add_executable(${PROJECT_NAME}
 	main.cpp
+	game_system/MapSys.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC ../GEcm)

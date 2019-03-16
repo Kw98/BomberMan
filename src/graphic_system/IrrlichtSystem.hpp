@@ -27,9 +27,8 @@ public:
 		_smgr = _device->getSceneManager();
 		_guienv = _device->getGUIEnvironment();
 		initIrrlicht(gloop);
-		
-		createCube({14.0, 15.0, 20.0}, "./assets/box.jpg", 1);
-		setCamera({0.0, 20.0, 20.0}, {10.0, 15.0, 20.0});
+
+		setCamera({Bomber::MAX_X / 2, (Bomber::MAX_Y / 2) - 10, 20.0}, {Bomber::MAX_X / 2, Bomber::MAX_Y / 2, 0.0});
 		displayIrrlicht(gloop);
 	};
 
@@ -47,12 +46,13 @@ private:
 				gloop.get_stage_manager(); // useless line
 				reg.size(); //useless line
 
-				auto entityLists = reg.global_view<Bomber::Graphics>();
+				auto entityLists = reg.global_view<Bomber::Graphics, Bomber::Pos>();
 				for (auto entity = entityLists.begin(); entity != entityLists.end(); entity++) {
 					auto &entityGraphics = std::get<Bomber::Graphics *>(entity->comps);
+					auto &entityPos = std::get<Bomber::Pos *>(entity->comps);
 
 					if (entityGraphics->isVisible) {
-						createCube(entityGraphics->pos, entityGraphics->texture, entity->id);
+						createCube({static_cast<double>(entityPos->x), static_cast<double>(entityPos->y), static_cast<double>(entityPos->z)}, entityGraphics->texture, entity->id);
 					}
 
 				}
