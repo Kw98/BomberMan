@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <queue>
+#include "GLoop.hpp"
 #include "Register.hpp"
 
 struct vec3df {
@@ -18,6 +19,11 @@ namespace Bomber {
 	constexpr char	BOX_T[] = "./sprites/wood_box.png";
 	constexpr char	PLAYER_ONE_T[] = "./sprites/p1.jpg";
 	constexpr char	PLAYER_TWO_T[] = "./sprites/p2.jpg";
+	constexpr char	BOMB_T[] = "./sprites/bomb.jpg";
+	constexpr char	FIRE_T[] = "./sprites/fire.jpg";
+	constexpr char	BIG_EXPL_BONUS_T[] = "./sprites/bonus_big_explosion.jpg";
+	constexpr char	MORE_BOMB_BONUS_T[] = "./sprites/more_bomb_bonus.jpg";
+	constexpr char	LIFE_BONUS_T[] = "./sprites/life_bonus.jpg";
 
 	constexpr char	GAME_SONG[] = "./assets/CANDY.ogg";
 
@@ -98,6 +104,7 @@ namespace Bomber {
 	struct Bomb {
 		GEcm::entity_type	parent;
 		int			explosion_radius;
+		gloop::gtimer	put_timer;
 	};
 
 	struct Graphics {
@@ -110,6 +117,12 @@ namespace Bomber {
 
 	struct Inputs {
 		std::queue<Bomber::Keys>	keys;
+	};
+
+	struct Explosion {
+		GEcm::entity_type	parent;
+		int			damage;
+		gloop::gtimer	timer;
 	};
 
 } // Bomber
