@@ -118,10 +118,6 @@ private:
 
 		} else if (egraphic->type == Bomber::ItemType::TEXT) {
 			// std::cout << egraphic->texture.c_str() << std::endl;
-			// ITexture* images = _driver->getTexture(egraphic->texture.c_str());
-			// _driver->draw2DImage(images, core::position2d<s32>(0,0),
-			// 	core::rect<s32>(0,0,342,224), 0,
-			// 	video::SColor(255,255,255,255), true);
 		} else {
 
 		}
@@ -180,8 +176,12 @@ private:
 				_todelete.clear();
 				if (_device->run()) {
 					_driver->beginScene(true, true, SColor(255, 100, 101, 140));
+					ITexture* images = _driver->getTexture(Bomber::TITLE_T);
 					_smgr->drawAll();
 					_guienv->drawAll();
+					_driver->draw2DImage(images, core::position2d<s32>(25, 30),
+						core::rect<s32>(0,0,256,72), 0,
+						video::SColor(255,255,255,255), true);
 					_driver->endScene();
 				}
 				return gloop::HookStatus::OK;
