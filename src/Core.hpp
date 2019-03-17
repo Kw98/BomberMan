@@ -5,6 +5,7 @@
 #include "GLoop.hpp"
 #include "Register.hpp"
 #include "IrrlichtSystem.hpp"
+#include "BackgroundSys.hpp"
 
 namespace Bomber {
 
@@ -17,6 +18,7 @@ namespace Bomber {
 
 			void	run() {
 				Bomber::MapSys	map(_gloop);
+				Bomber::BackgroundSys background(_gloop);
 				Bomber::PlayerSys	players(_gloop);
 
 				_gloop.run(_reg);

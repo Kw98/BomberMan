@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+#include <irrKlang.h>
 #include <irrlicht/irrlicht.h>
 #include <unordered_map>
 #include "GLoop.hpp"
@@ -46,6 +47,11 @@ class IrrlichtSystem
 {
 public:
 	IrrlichtSystem(gloop::GLoop &gloop) {
+		_engine = irrklang::createIrrKlangDevice();
+		if (!_engine) {
+			throw std::runtime_error("Couldn't init Irrklang engine");
+		}
+
 		_device = createDevice( video::EDT_OPENGL, dimension2d<u32>(WIDTH, HEIGHT), 16, false, false, false, &_events);
 		_device->setWindowCaption(L"Bomberman !");
 		_driver = _device->getVideoDriver();
@@ -54,17 +60,23 @@ public:
 		initIrrlicht(gloop);
 
 		setCamera({Bomber::MAX_X / 2, (Bomber::MAX_Y / 2) - 10, 20.0}, {Bomber::MAX_X / 2, Bomber::MAX_Y / 2, 0.0});
+		setCamera({Bomber::MAX_X / 2, (Bomber::MAX_Y / 2) - 15, 20.0}, {Bomber::MAX_X / 2, Bomber::MAX_Y / 2, 0.0});
 		displayIrrlicht(gloop);
 		detectKeyManager(gloop);
 	};
 
 	~IrrlichtSystem() {
+		if (_engine)
+			_engine->drop();
 		_device->drop();
 	};
 
 private:
 
 	void initIrrlicht(gloop::GLoop &gloop) {
+		stop();
+		_engine->play2D(Bomber::GAME_SONG, true, false);
+
 		auto &stageManager = gloop.get_stage_manager();
 		auto &stage = stageManager.get_stage(gloop::StageType::INIT);
 		gloop::SystemHook info = {IRRLICHT_SYS_NAME, 1, 1, true,
@@ -217,6 +229,8 @@ private:
 	}
 
 private:
+	irrklang::ISoundEngine	*_engine;
+
 	IrrEvents	_events;
 	IrrlichtDevice *_device;
 	IVideoDriver* _driver;

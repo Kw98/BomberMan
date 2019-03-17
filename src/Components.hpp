@@ -13,10 +13,13 @@ struct vec3df {
 namespace Bomber {
 
 	constexpr char	GROUND_T[] = "./sprites/BrickGround.jpg";
+	constexpr char	BACKGROUND_T[] = "./sprites/backgroundBrick.jpg";
 	constexpr char	WALL_T[] = "./sprites/BrickWall.jpg";
 	constexpr char	BOX_T[] = "./sprites/wood_box.png";
 	constexpr char	PLAYER_ONE_T[] = "./sprites/p1.jpg";
 	constexpr char	PLAYER_TWO_T[] = "./sprites/p2.jpg";
+
+	constexpr char	GAME_SONG[] = "./assets/CANDY.ogg";
 
 	constexpr int	MAX_X = 17;
 	constexpr int	MAX_Y = 19;
