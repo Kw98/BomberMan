@@ -24,6 +24,8 @@ namespace Bomber {
 	constexpr char	BIG_EXPL_BONUS_T[] = "./sprites/bonus_big_explosion.jpg";
 	constexpr char	MORE_BOMB_BONUS_T[] = "./sprites/more_bomb_bonus.jpg";
 	constexpr char	LIFE_BONUS_T[] = "./sprites/life_bonus.jpg";
+	constexpr char	TITLE_T[] = "./sprites/title.png";
+
 
 	constexpr char	GAME_SONG[] = "./assets/CANDY.ogg";
 

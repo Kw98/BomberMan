@@ -4,7 +4,7 @@ endif ()
 
 cmake_minimum_required(VERSION 3.13)
 
-set(CMAKE_CXX_FLAGS "-Wall -Wextra -g3 -std=c++17")
+set(CMAKE_CXX_FLAGS "-Wall -Wextra -g3 -std=c++17 -pthread")
 set(CXX_STANDARD 17)
 
 project(Bomber VERSION 1.0)
@@ -14,14 +14,17 @@ include("checkBuildType")
 include("getIrrlicht")
 include("getIrrKlang")
 
+include_directories(
+	${IRRLICHT_INCLUDE_DIR}
+	${IRRKLANG_INCLUDE_DIR}
+)
+
 add_subdirectory(src)
 add_subdirectory(GLoop)
-
 
 message("IRRLICHT_INCLUDE_DIR => ${IRRLICHT_INCLUDE_DIR}")
 message("IRRLICHT_LIBRARY_DIR => ${IRRLICHT_LIBRARY_DIR}")
 message("IRRKLANG_INCLUDE_DIR => ${IRRKLANG_INCLUDE_DIR}")
-
 
 target_link_libraries(${PROJECT_NAME}
 	libGLoop

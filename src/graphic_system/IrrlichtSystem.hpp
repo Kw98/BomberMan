@@ -74,7 +74,7 @@ public:
 private:
 
 	void initIrrlicht(gloop::GLoop &gloop) {
-		stop();
+		// stop();
 		_engine->play2D(Bomber::GAME_SONG, true, false);
 
 		auto &stageManager = gloop.get_stage_manager();
@@ -117,7 +117,11 @@ private:
 		} else if (egraphic->type == Bomber::ItemType::MESH) {
 
 		} else if (egraphic->type == Bomber::ItemType::TEXT) {
-
+			// std::cout << egraphic->texture.c_str() << std::endl;
+			// ITexture* images = _driver->getTexture(egraphic->texture.c_str());
+			// _driver->draw2DImage(images, core::position2d<s32>(0,0),
+			// 	core::rect<s32>(0,0,342,224), 0,
+			// 	video::SColor(255,255,255,255), true);
 		} else {
 
 		}

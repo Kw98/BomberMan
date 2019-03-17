@@ -1,12 +1,15 @@
 #!/bin/sh
-mkdir build 
 
-cd build
+mkdir -p build && cd build && cmake -DCMAKE_BUILD_TYPE=Debug .. && make && cd -
 
-cmake ..
+# mkdir build 
 
-make
+# cd build
 
-cd ..
+# cmake ..
 
-rm -rf build/
+# make
+
+# cd ..
+
+# rm -rf build/
