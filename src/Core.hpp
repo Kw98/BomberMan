@@ -2,7 +2,9 @@
 
 #include "MapSys.hpp"
 #include "PlayerSys.hpp"
+#include "BombSys.hpp"
 #include "GLoop.hpp"
+#include "ExplosionSys.hpp"
 #include "Register.hpp"
 #include "IrrlichtSystem.hpp"
 
@@ -18,6 +20,8 @@ namespace Bomber {
 			void	run() {
 				Bomber::MapSys	map(_gloop);
 				Bomber::PlayerSys	players(_gloop);
+				Bomber::BombSys	bombs(_gloop);
+				Bomber::ExplosionSys	explosions(_gloop);
 
 				_gloop.run(_reg);
 			}
