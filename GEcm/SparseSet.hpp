@@ -1,5 +1,7 @@
 #pragma once
 
+#include <iostream>
+
 #include <vector>
 #include <cstdint>
 #include <stdexcept>
@@ -192,6 +194,12 @@ namespace GEcm {
 			inline size_type		pos(const size_type &n) {
 				return GetRealId(dense[n]);
 			}
+			
+			inline size_type		*bpos(const size_type &n) {
+				if (dense[n] == 0)
+					return nullptr;
+				return &(dense[n]);
+			}
 
 			void		push(const entity_type &data) {
 				if (data >= dense_s) {
@@ -360,7 +368,7 @@ namespace GEcm {
 			}
 
 			void		destroy(const entity_type &entity) {
-				if (!parent::has(entity))
+				if (!parent::has(entity) || bpos(parent::back()) == nullptr)
 					return;
 				if (parent::pos(entity) != parent::pos(parent::back()))
 					direct[parent::pos(entity)] = std::move(direct[parent::pos(parent::back())]);

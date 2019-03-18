@@ -15,13 +15,13 @@ namespace Bomber {
 			BombSys(gloop::GLoop &gloop) {
 				gloop::StageManager	&stages = gloop.get_stage_manager();
 
-				gloop::SystemHook	vis = gloop::SystemHook{BOMB_SYS_NAME, 4, 100, false, [this](GEcm::Register &reg, gloop::GLoop &){
+				gloop::SystemHook	vis = gloop::SystemHook{BOMB_SYS_NAME, 4, 80, false, [this](GEcm::Register &reg, gloop::GLoop &){
 					updateBombState(reg);
 					return gloop::HookStatus::OK; }};
 
 				stages.get_stage(gloop::StageType::LOOP).add_hook(gloop::HookType::EARLY, vis);
 
-				gloop::SystemHook	update = gloop::SystemHook{BOMB_SYS_NAME, 5, 60, false, [this](GEcm::Register &reg, gloop::GLoop &){
+				gloop::SystemHook	update = gloop::SystemHook{BOMB_SYS_NAME, 5, 80, false, [this](GEcm::Register &reg, gloop::GLoop &){
 					updateBombTimer(reg);
 					return gloop::HookStatus::OK; }};
 				stages.get_stage(gloop::StageType::LOOP).add_hook(gloop::HookType::MIDDLE, update);

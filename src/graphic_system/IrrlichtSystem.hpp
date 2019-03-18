@@ -160,7 +160,6 @@ private:
 		auto &stage = stageManager.get_stage(gloop::StageType::LOOP);
 		gloop::SystemHook info = {IRRLICHT_SYS_NAME, 1, 1, true,
 			[this](GEcm::Register &reg, gloop::GLoop &) {
-
 				auto entityLists = reg.global_view<Bomber::Graphics, Bomber::Pos>();
 				for (auto entity = entityLists.begin(); entity != entityLists.end(); entity++) {
 					auto &entityGraphics = std::get<Bomber::Graphics *>(entity->comps);
@@ -178,7 +177,7 @@ private:
 					_driver->beginScene(true, true, SColor(255, 100, 101, 140));
 					ITexture* images = _driver->getTexture(Bomber::TITLE_T);
 					_smgr->drawAll();
-					_guienv->drawAll();
+					//_guienv->drawAll();
 					_driver->draw2DImage(images, core::position2d<s32>(25, 30),
 						core::rect<s32>(0,0,256,72), 0,
 						video::SColor(255,255,255,255), true);
@@ -194,7 +193,7 @@ private:
 		auto &stageManager = gloop.get_stage_manager();
 		auto &stage = stageManager.get_stage(gloop::StageType::LOOP);
 		
-		gloop::SystemHook info = {IRRLICHT_SYS_NAME, 5, 100, true,
+		gloop::SystemHook info = {IRRLICHT_SYS_NAME, 5, 80, true,
 			[this](GEcm::Register &reg, gloop::GLoop &) {
 				bool alter = true;
 				auto entityList = reg.global_view<Bomber::Inputs>();

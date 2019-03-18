@@ -21,7 +21,7 @@ namespace Bomber {
 
 				stages.get_stage(gloop::StageType::INIT).add_hook(gloop::HookType::EARLY, init);
 
-				gloop::SystemHook actions = gloop::SystemHook{PLAYER_SYS_NAME, 5, 100, false, [this](GEcm::Register &reg, gloop::GLoop &){
+				gloop::SystemHook actions = gloop::SystemHook{PLAYER_SYS_NAME, 5, 80, false, [this](GEcm::Register &reg, gloop::GLoop &){
 					if (reg.has<Bomber::Stat>(_playerO))
 						playerAction(reg, _playerO);
 					if (reg.has<Bomber::Stat>(_playerT))
@@ -106,7 +106,7 @@ namespace Bomber {
 				else if (b == Bomber::Bomber_bonus::MORE_BOMB)
 					reg.get<Bomber::Stat>(player).max_bomb += 1;
 				else if (b == Bomber::Bomber_bonus::LIFE)
-					reg.get<Bomber::Stat>(player).life += 1;
+					reg.get<Bomber::Stat>(player).life += 20;
 			}
 
 			/* Data */

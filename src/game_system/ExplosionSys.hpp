@@ -18,7 +18,7 @@ namespace Bomber {
 				_rand.seed(time(NULL));
 				gloop::StageManager	&stages = gloop.get_stage_manager();
 
-				gloop::SystemHook	kill = gloop::SystemHook{EXPLOSION_SYS_NAME, 4, 60, false, [this](GEcm::Register &reg, gloop::GLoop &){
+				gloop::SystemHook	kill = gloop::SystemHook{EXPLOSION_SYS_NAME, 4, 50, false, [this](GEcm::Register &reg, gloop::GLoop &){
 					killPlayerBox(reg);
 
 					return gloop::HookStatus::OK; }};
@@ -42,8 +42,10 @@ namespace Bomber {
 						if (explosion->id == entity->id || epos->x != expos->x || epos->y != expos->y)
 							continue;
 						if (reg.has<Bomber::Stat>(entity->id)) {
-							reg.get<Bomber::Stat>(entity->id).life--;
-							if (reg.get<Bomber::Stat>(entity->id).life == 0)
+							std::cout << "I HAVE LIFE: " << reg.get<Bomber::Stat>(entity->id).life << std::endl;
+							reg.get<Bomber::Stat>(entity->id).life -= 1;
+							std::cout << "REMOVE LIFE: " << reg.get<Bomber::Stat>(entity->id).life << std::endl;
+							if (reg.get<Bomber::Stat>(entity->id).life <= 0)
 								reg.get<Bomber::Graphics>(entity->id).state = Bomber::State::DELETE;
 						} else if (reg.has<Bomber::Bomber_types>(entity->id)) {
 							killBox(reg, *epos);
