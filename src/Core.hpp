@@ -5,6 +5,7 @@
 #include "BombSys.hpp"
 #include "GLoop.hpp"
 #include "ExplosionSys.hpp"
+#include "WinSys.hpp"
 #include "Register.hpp"
 #include "IrrlichtSystem.hpp"
 #include "BackgroundSys.hpp"
@@ -24,6 +25,7 @@ namespace Bomber {
 				Bomber::PlayerSys	players(_gloop);
 				Bomber::BombSys	bombs(_gloop);
 				Bomber::ExplosionSys	explosions(_gloop);
+				Bomber::WinSys		win(_gloop);
 
 				_gloop.run(_reg);
 			}
