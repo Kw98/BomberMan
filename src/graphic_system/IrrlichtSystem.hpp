@@ -3,6 +3,7 @@
 #include <iostream>
 #include <irrKlang.h>
 #include <irrlicht/irrlicht.h>
+#include <ITimer.h>
 #include <unordered_map>
 #include "GLoop.hpp"
 #include "Components.hpp"
@@ -51,16 +52,16 @@ public:
 		if (!_engine) {
 			throw std::runtime_error("Couldn't init Irrklang engine");
 		}
-
 		_device = createDevice( video::EDT_OPENGL, dimension2d<u32>(WIDTH, HEIGHT), 16, false, false, false, &_events);
 		_device->setWindowCaption(L"Bomberman !");
 		_driver = _device->getVideoDriver();
 		_smgr = _device->getSceneManager();
 		_guienv = _device->getGUIEnvironment();
+		//_font = _device->getGUIEnvironment()->getBuiltInFont();
+		_font = _guienv->getFont("./assets/myfont.xml");
 		initIrrlicht(gloop);
 
-		setCamera({Bomber::MAX_X / 2, (Bomber::MAX_Y / 2) - 10, 20.0}, {Bomber::MAX_X / 2, Bomber::MAX_Y / 2, 0.0});
-		setCamera({Bomber::MAX_X / 2, (Bomber::MAX_Y / 2) - 15, 20.0}, {Bomber::MAX_X / 2, Bomber::MAX_Y / 2, 0.0});
+		setCamera({Bomber::MAX_X / 2, (Bomber::MAX_Y / 2) - 5, 20.0}, {Bomber::MAX_X / 2, Bomber::MAX_Y / 2, 0.0});
 		displayIrrlicht(gloop);
 		detectKeyManager(gloop);
 	};
@@ -115,6 +116,12 @@ private:
 			_nodes[ent] = createSphere({static_cast<double>(epos->x), static_cast<double>(epos->y), static_cast<double>(epos->z)}, egraphic->texture, egraphic->size, ent);
 			_nodes[ent]->setVisible(egraphic->isVisible);
 		} else if (egraphic->type == Bomber::ItemType::MESH) {
+			ITexture* images = _driver->getTexture(egraphic->texture.c_str());
+
+			_driver->draw2DImage(images, core::position2d<s32>(epos->x, epos->y),
+				core::rect<s32>(0,0,256,72), 0,
+				video::SColor(255,255,255,255), true);
+
 
 		} else if (egraphic->type == Bomber::ItemType::TEXT) {
 			// std::cout << egraphic->texture.c_str() << std::endl;
@@ -174,13 +181,27 @@ private:
 				}
 				_todelete.clear();
 				if (_device->run()) {
+					core::stringw elapseTime = L"Time: ";
+					elapseTime += core::stringw(_device->getTimer()->getTime() / 1000);
+
 					_driver->beginScene(true, true, SColor(255, 100, 101, 140));
-					ITexture* images = _driver->getTexture(Bomber::TITLE_T);
 					_smgr->drawAll();
-					//_guienv->drawAll();
+					_guienv->drawAll();
+
+					// TIMER
+					if (_font) {
+						_font->draw(elapseTime.c_str(),
+							core::rect<s32>(WIDTH / 2 - 50, 50, 200,200),
+							video::SColor(255,255,255,255));
+					}
+
+					// BOMBERMAN TITLE
+					ITexture* images = _driver->getTexture(Bomber::TITLE_T);
+
 					_driver->draw2DImage(images, core::position2d<s32>(25, 30),
 						core::rect<s32>(0,0,256,72), 0,
 						video::SColor(255,255,255,255), true);
+
 					_driver->endScene();
 				}
 				return gloop::HookStatus::OK;
@@ -239,7 +260,7 @@ private:
 
 private:
 	irrklang::ISoundEngine	*_engine;
-
+    gui::IGUIFont* _font;
 	IrrEvents	_events;
 	IrrlichtDevice *_device;
 	IVideoDriver* _driver;

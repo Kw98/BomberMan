@@ -15,6 +15,7 @@ namespace Bomber {
 
 	constexpr char	GROUND_T[] = "./sprites/BrickGround.jpg";
 	constexpr char	BACKGROUND_T[] = "./sprites/backgroundBrick.jpg";
+	constexpr char	BACKGROUND_GRASS_T[] = "./sprites/grass.jpg";
 	constexpr char	WALL_T[] = "./sprites/BrickWall.jpg";
 	constexpr char	BOX_T[] = "./sprites/wood_box.png";
 	constexpr char	PLAYER_ONE_T[] = "./sprites/p1.jpg";

@@ -34,17 +34,17 @@ namespace Bomber {
 
 				for (auto explosion = explosions.begin(); explosion != explosions.end(); explosion++) {
 					auto	elasped = std::chrono::duration_cast<std::chrono::milliseconds>(now - std::get<Bomber::Explosion *>(explosion->comps)->timer).count();
-					if (elasped >= EXPLOSION_TIMER)
+					if (elasped >= EXPLOSION_TIMER) {
 						reg.get<Bomber::Graphics>(explosion->id).state = Bomber::State::DELETE;
+						continue;
+					}
 					auto expos = std::get<Bomber::Pos *>(explosion->comps);
 					for (auto entity = others.begin(); entity != others.end(); entity++) {
 						auto epos = std::get<Bomber::Pos *>(entity->comps);
 						if (explosion->id == entity->id || epos->x != expos->x || epos->y != expos->y)
 							continue;
 						if (reg.has<Bomber::Stat>(entity->id)) {
-							std::cout << "I HAVE LIFE: " << reg.get<Bomber::Stat>(entity->id).life << std::endl;
 							reg.get<Bomber::Stat>(entity->id).life -= 1;
-							std::cout << "REMOVE LIFE: " << reg.get<Bomber::Stat>(entity->id).life << std::endl;
 							if (reg.get<Bomber::Stat>(entity->id).life <= 0)
 								reg.get<Bomber::Graphics>(entity->id).state = Bomber::State::DELETE;
 						} else if (reg.has<Bomber::Bomber_types>(entity->id)) {
