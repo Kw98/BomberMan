@@ -11,9 +11,6 @@ namespace Bomber {
 			gloop::StageManager	&stages = gloop.get_stage_manager();
 
 			gloop::SystemHook hook = gloop::SystemHook{"BACKGROUND_SYS", 10, 0, false, [this](GEcm::Register &reg, gloop::GLoop &) {
-				auto titleImg = reg.create();
-				reg.construct<Bomber::Graphics>(titleImg, true, Bomber::TITLE_T, Bomber::ItemType::TEXT, Bomber::State::NEW, 5.0);
-				reg.construct<Bomber::Pos>(titleImg, Bomber::MAX_X - 20, Bomber::MAX_Y, 6);
 				for (int y = -30; y < Bomber::MAX_Y + 30; y += 5) {
 					for (int x = -30; x < Bomber::MAX_X + 30; x++) {
 						if ((x >= 0 && x <= Bomber::MAX_X) &&
@@ -26,6 +23,15 @@ namespace Bomber {
 						}
 					}
 				}
+				auto titleImg = reg.create();
+				reg.construct<Bomber::Graphics>(titleImg, true, Bomber::TITLE_T, Bomber::ItemType::MESH, Bomber::State::NEW, 1.0);
+				reg.construct<Bomber::Pos>(titleImg, 25, 30, 6);
+				// ITexture* images = _driver->getTexture(Bomber::TITLE_T);
+
+				// _driver->draw2DImage(images, core::position2d<s32>(25, 30),
+				// 	core::rect<s32>(0,0,256,72), 0,
+				// 	video::SColor(255,255,255,255), true);
+
 				return gloop::HookStatus::OK; }};
 
 			stages.get_stage(gloop::StageType::INIT).add_hook(gloop::HookType::EARLY, hook);
