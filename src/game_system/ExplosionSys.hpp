@@ -42,8 +42,9 @@ namespace Bomber {
 						if (explosion->id == entity->id || epos->x != expos->x || epos->y != expos->y)
 							continue;
 						if (reg.has<Bomber::Stat>(entity->id)) {
-							//PLAYER
-							reg.get<Bomber::Graphics>(entity->id).state = Bomber::State::DELETE;
+							reg.get<Bomber::Stat>(entity->id).life--;
+							if (reg.get<Bomber::Stat>(entity->id).life == 0)
+								reg.get<Bomber::Graphics>(entity->id).state = Bomber::State::DELETE;
 						} else if (reg.has<Bomber::Bomber_types>(entity->id)) {
 							killBox(reg, *epos);
 							reg.get<Bomber::Graphics>(entity->id).state = Bomber::State::DELETE;
